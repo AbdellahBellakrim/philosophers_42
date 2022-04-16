@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:50:19 by abellakr          #+#    #+#             */
-/*   Updated: 2022/04/16 16:21:40 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/04/16 17:46:08 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void parsing(int ac, char **av, t_args *args)
 		write(2, "invalid arguments\n", 18);
 		exit(1);
 	}
-	args->number_philos = av[1];
-	args->die_time = av[2];
-	args->eat_time = av[3];
-	args->sleep_time = av[4];
+	args->number_philos = ft_atoi(av[1]);
+	args->die_time = ft_atoi(av[2]);
+	args->eat_time = ft_atoi(av[3]);
+	args->sleep_time = ft_atoi(av[4]);
 	if(ac == 6)
-		args->meal_number = av[5];
+		args->meal_number = ft_atoi(av[5]);
 }
 //-------------------------------------------------
 int	ft_isdigit(int str)
@@ -40,25 +40,29 @@ int	ft_isdigit(int str)
 int	check_arguments(int ac, char **av)
 {
 	int i;
+	int j;
 
 	i = 1;
-	if (ac == 5)
+	while(i < ac)
 	{
-		while(i <= 5)
+		j = 0;
+		while(av[i][j])
 		{
-			if(ft_isdigit(av[i]) == 0)
+			if(ft_isdigit(av[i][j]) == 0)
 				return (0);
-			i++;
+			j++;	
 		}
-	}
-	else if(ac == 6)
-	{
-		while(i <= 6)
-		{
-			if(ft_isdigit(av[i]) == 0)
-				return (0);
-			i++;
-		}
+		i++;
 	}
 	return (1);
+}
+//---------------------------------------------------
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }

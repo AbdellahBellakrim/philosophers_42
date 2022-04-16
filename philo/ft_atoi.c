@@ -6,40 +6,22 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 16:25:27 by abellakr          #+#    #+#             */
-/*   Updated: 2022/04/16 16:26:44 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/04/16 17:23:03 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#inclued "philo.h"
+#include "philo.h"
 
 //---------------------------------------
-int	ft_atoi(char *p)
+int	check_max(long long number, int signe)
 {
-	long long		k;
-	int				signe;
-
-	signe = 1;
-	k = 0;
-	if (*p == '+')
-		p++;
-	if (*p == '-')
-	{
-		signe = -signe;
-		p++;
-	}
-	p = ft_trizo(p, '0');
-	if (ft_strlen(p) > 11)
+	number = number * signe;
+	if (number > INT_MAX || number < INT_MIN)
 	{
 		write(2, "Error\n", 6);
 		exit(1);
 	}
-	free(p);
-	while (*p >= '0' && *p <= '9')
-	{
-		k = k * 10 + (*p - 48);
-		p++;
-	}
-	return (check_max(k, signe));
+	return (number);
 }
 
 //---------------------------------------
@@ -71,14 +53,33 @@ char	*ft_trizo(char *s, char c)
 	tab[j] = '\0';
 	return (tab);
 }
+
 //---------------------------------------
-int	check_max(long long number, int signe)
+int	ft_atoi(char *p)
 {
-	number = number * signe;
-	if (number > INT_MAX || number < INT_MIN)
+	long long		k;
+	int				signe;
+
+	signe = 1;
+	k = 0;
+	if (*p == '+')
+		p++;
+	if (*p == '-')
+	{
+		signe = -signe;
+		p++;
+	}
+	p = ft_trizo(p, '0');
+	if (ft_strlen(p) > 11)
 	{
 		write(2, "Error\n", 6);
 		exit(1);
 	}
-	return (number);
+	free(p);
+	while (*p >= '0' && *p <= '9')
+	{
+		k = k * 10 + (*p - 48);
+		p++;
+	}
+	return (check_max(k, signe));
 }

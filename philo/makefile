@@ -6,7 +6,7 @@
 #    By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/16 15:24:59 by abellakr          #+#    #+#              #
-#    Updated: 2022/04/16 16:27:04 by abellakr         ###   ########.fr        #
+#    Updated: 2022/04/16 17:07:24 by abellakr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJ = $(SRC:.c=.o)
 
 all : $(NAME)
 %.o:%.c
-	$(CC) $(CFlAGS) -c $<
+	@$(CC) $(CFlAGS) -c $<
 $(NAME) : $(OBJ)
 	@$(CC) $(CFlAGS) $(OBJ) -o $(NAME)
 clean : 
