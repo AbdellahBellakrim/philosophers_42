@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 02:33:33 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/12 13:00:45 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/12 15:18:09 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct t_philo
 {
 	t_args			*shared_data;
 	pthread_t 		*thread;
+	pthread_mutex_t	*fork;
 	int 			id;
 	int 			max_eat; // check how much the philo has been eaten
 	struct t_philo	*next;

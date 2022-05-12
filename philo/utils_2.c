@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 10:53:40 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/12 12:18:35 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/12 15:19:51 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_philo	*ft_lstnew(int id, t_args *shared_data)
 	element = (t_philo *)malloc(sizeof(t_philo));
 	if (!element)
 		return (0);
+	pthread_mutex_init(&(element->fork), NULL);
 	element->id = id;
 	element->max_eat = 0;
 	element->shared_data = shared_data;
