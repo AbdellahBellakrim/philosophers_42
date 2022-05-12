@@ -6,27 +6,32 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:50:19 by abellakr          #+#    #+#             */
-/*   Updated: 2022/04/20 01:43:32 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/12 11:33:45 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 //-------------------------------------------------
-void parsing(int ac, char **av, t_args *args)
+int	parsing(int ac, char **av, t_args *shared_data)
 {
 	if(check_arguments(ac, av) == 0)
 	{
 		//free memory allocated
 		write(2, "invalid arguments\n", 18);
-		exit(1);
+		return(-1);
 	}
-	args->number_philos = ft_atoi(av[1]);
-	args->die_time = ft_atoi(av[2]);
-	args->eat_time = ft_atoi(av[3]);
-	args->sleep_time = ft_atoi(av[4]);
+	shared_data->number_philos = ft_atoi(av[1]);
+	shared_data->die_time = ft_atoi(av[2]);
+	shared_data->eat_time = ft_atoi(av[3]);
+	shared_data->sleep_time = ft_atoi(av[4]);
 	if(ac == 6)
-		args->meal_number = ft_atoi(av[5]);
+		shared_data->meal_number = ft_atoi(av[5]);
+	if(shared_data->number_philos == -1 || \
+	shared_data->die_time == -1 || shared_data->eat_time == -1 || \
+	shared_data->sleep_time == -1 || shared_data->meal_number == -1)
+		return(-1);
+	return(0);
 }
 //-------------------------------------------------
 int	ft_isdigit(int str)
