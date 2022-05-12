@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 02:33:24 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/12 12:19:09 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/12 12:27:02 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,11 @@ int main(int ac, char **av)
 		return(write(2, "out of memory\n", 14), 1);
 	if(parsing(ac, av, &shared_data) == -1)
 		return(1);
-	// printf("number of philos : %d\n", shared_data.number_philos);
-	// printf("die_time : %d \n", shared_data.die_time);
-	// printf("eat_time : %d \n", shared_data.eat_time);
-	// printf("sleep_time : %d \n", shared_data.sleep_time);
-	// printf("meal_number : %d \n", shared_data.meal_number);
+	create_list(&philo, &shared_data);
+	while(philo != NULL)
+	{
+		printf("%d\n", philo->id);
+		philo = philo->next;
+	}
 	return(0);
 }
