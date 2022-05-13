@@ -6,7 +6,7 @@
 #    By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/16 15:24:59 by abellakr          #+#    #+#              #
-#    Updated: 2022/05/12 12:26:32 by abellakr         ###   ########.fr        #
+#    Updated: 2022/05/13 13:03:28 by abellakr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,3 +76,9 @@ re : fclean all
 # // printf("eat_time : %d \n", shared_data.eat_time);
 # // printf("sleep_time : %d \n", shared_data.sleep_time);
 # // printf("meal_number : %d \n", shared_data.meal_number);
+# ----------------------------------------------
+	# // while(philo != NULL)
+	# // {
+	# // 	printf("%d\n", philo->id);
+	# // 	philo = philo->next;
+	# // }
