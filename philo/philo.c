@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 02:33:24 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/13 14:28:03 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/13 16:58:56 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,11 @@ int main(int ac, char **av)
 	create_list(&philo, &shared_data);
 	create_threads(&philo);
 	while (1)
+	{
 		sleep(1);
+		if(meal_number(philo, shared_data) == 1)
+			return(0);
+	}
 	return(0);
 }
 //--------------------------------- create lincked list 
@@ -68,8 +72,8 @@ void routine(void *philo)
 	while(backup->shared_data->dead == 0)
 	{
 		eating_function(backup);
-		// sleeping_function
-		// thinking_function
+		sleeping_function(backup);
+		thinking_function(backup);
 	}
 }
 //-------------------------------------------- eating function
@@ -82,12 +86,40 @@ int eating_function(t_philo *philo)
 	else
 		left_fork = philo->next;
 	pthread_mutex_lock (&(philo->fork));
-	printf("%d had taken his fork\n", philo->id);
+	printf("%d had taken a fork\n", philo->id);
 	pthread_mutex_lock (&(left_fork->fork));
-	printf("%d had taken his left fork\n", philo->id);
-	printf("%d start eating\n", philo->id);
+	printf("%d  is eating\n", philo->id);
 	usleep(philo->shared_data->eat_time * 1000);
+	philo->max_eat++;
 	pthread_mutex_unlock (&(philo->fork));
 	pthread_mutex_unlock (&(left_fork->fork));
 	return (0);
+}
+//------------------------------------------------ sleeping function
+int sleeping_function(t_philo *philo)
+{
+	printf("%d is sleeping\n", philo->id);
+	usleep(philo->shared_data->sleep_time * 1000);
+	return (0);
+}
+//--------------------------------------------- thinking_function
+int thinking_function(t_philo *philo)
+{
+	printf("%d is thinking\n", philo->id);
+	return (0);
+}
+//-------------------------------------------------- check meal number function
+int	meal_number(t_philo *philo, t_args shared_data)
+{
+	t_philo *backup;
+
+	backup = philo;
+	while(backup)
+	{
+		if (backup->max_eat < shared_data.meal_number)
+			return (0);
+		else if(backup->max_eat >= shared_data.meal_number)
+			backup = backup->next;
+	}
+	return (1);
 }

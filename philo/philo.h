@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 02:33:33 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/13 14:22:04 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/13 16:44:56 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,9 @@ int create_threads(t_philo **philo);
 // ----------------------------------------- routine
 void routine(void *philo);
 int eating_function(t_philo *philo);
+int sleeping_function(t_philo *philo);
+int thinking_function(t_philo *philo);
+int	meal_number(t_philo *philo, t_args shared_data);
+
 
 #endif
