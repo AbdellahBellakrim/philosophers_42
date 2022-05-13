@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 02:33:24 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/13 16:58:56 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/13 19:14:24 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,7 @@ int main(int ac, char **av)
 	create_list(&philo, &shared_data);
 	create_threads(&philo);
 	while (1)
-	{
 		sleep(1);
-		if(meal_number(philo, shared_data) == 1)
-			return(0);
-	}
 	return(0);
 }
 //--------------------------------- create lincked list 
@@ -90,7 +86,6 @@ int eating_function(t_philo *philo)
 	pthread_mutex_lock (&(left_fork->fork));
 	printf("%d  is eating\n", philo->id);
 	usleep(philo->shared_data->eat_time * 1000);
-	philo->max_eat++;
 	pthread_mutex_unlock (&(philo->fork));
 	pthread_mutex_unlock (&(left_fork->fork));
 	return (0);
@@ -108,18 +103,10 @@ int thinking_function(t_philo *philo)
 	printf("%d is thinking\n", philo->id);
 	return (0);
 }
-//-------------------------------------------------- check meal number function
-int	meal_number(t_philo *philo, t_args shared_data)
-{
-	t_philo *backup;
-
-	backup = philo;
-	while(backup)
-	{
-		if (backup->max_eat < shared_data.meal_number)
-			return (0);
-		else if(backup->max_eat >= shared_data.meal_number)
-			backup = backup->next;
-	}
-	return (1);
-}
+// meals number for each ph
+// check if a ph is dead
+// time for each ph 
+// errors of parse and malloc, all functions protection 
+// check leaks 
+// norme 
+// bonus

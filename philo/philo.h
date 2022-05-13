@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 02:33:33 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/13 16:44:56 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/13 19:10:24 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct t_args
 	int		die_time;
 	int		eat_time;
 	int		sleep_time;
-	int		meal_number;
+	int		meal_number; 
 	int 	dead; // check if a philo is dead or not
 	struct t_philo *head;
 }t_args;
@@ -33,7 +33,7 @@ typedef struct t_philo
 	pthread_t 		thread;
 	pthread_mutex_t	fork;
 	int 			id;
-	int 			max_eat; // check how much the philo has been eaten
+	int 			meals_eaten; // check how much the philo has been eaten
 	struct t_philo	*next;
 }t_philo;
 //------------------------------------------- parsing
@@ -56,7 +56,4 @@ void routine(void *philo);
 int eating_function(t_philo *philo);
 int sleeping_function(t_philo *philo);
 int thinking_function(t_philo *philo);
-int	meal_number(t_philo *philo, t_args shared_data);
-
-
 #endif
