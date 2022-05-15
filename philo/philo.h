@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 02:33:33 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/15 14:59:55 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/15 15:51:29 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct t_philo
 	pthread_mutex_t	fork;
 	int 			id;
 	int 			meals_eaten; // check how much the philo has been eaten
+	long			last_meal; // time of the last meal 
 	struct t_philo	*next;
 }t_philo;
 //------------------------------------------- parsing

@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 17:13:11 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/15 15:06:52 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/15 16:25:15 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,20 @@ int eating_function(t_philo *philo, long start_time)
 		left_fork = philo->next;
 	pthread_mutex_lock (&(philo->fork));
 	current_time = ft_gettime();
-	time = (current_time - start_time) / 1000;
-	printf("%ld %d had taken a fork\n",time ,philo->id);
+	time = (current_time - start_time);
+	printf("%ld %d has taken a fork\n",time ,philo->id);
 	pthread_mutex_lock (&(left_fork->fork));
-	current_time = ft_gettime();
-	time = (current_time - start_time) / 1000;
 	printf("%ld %d  is eating\n",time ,philo->id);
 	philo->meals_eaten++;
 	if(philo->meals_eaten == philo->shared_data->meal_number)
 		philo->shared_data->satisfied++;
-	usleep(philo->shared_data->eat_time * 1000);
+	int a = philo->shared_data->eat_time * 1000;
+	current_time = ft_gettime();
+	philo->last_meal = ft_gettime();
+	while(ft_gettime() - current_time < a / 1000)
+	{
+		usleep(100);
+	}
 	pthread_mutex_unlock (&(philo->fork));
 	pthread_mutex_unlock (&(left_fork->fork));
 	return (0);
@@ -63,9 +67,11 @@ int sleeping_function(t_philo *philo, long start_time)
 	long	time;
 
 	current_time = ft_gettime();
-	time = (current_time - start_time) / 1000;
+	time = (current_time - start_time);
 	printf("%ld %d is sleeping\n",time ,philo->id);
-	usleep(philo->shared_data->sleep_time * 1000);
+	int a = philo->shared_data->sleep_time * 1000;
+	while(ft_gettime() - current_time < a / 1000)
+		usleep(100);
 	return (0);
 }
 //--------------------------------------------- thinking_function
@@ -75,7 +81,7 @@ int thinking_function(t_philo *philo, long start_time)
 	long	time;
 
 	current_time = ft_gettime();
-	time = (current_time - start_time) / 1000;
+	time = (current_time - start_time);
 	printf("%ld %d is thinking\n",time ,philo->id);
 	return (0);
 }
@@ -85,5 +91,5 @@ long	ft_gettime(void)
 	struct timeval current_time;
 
 	gettimeofday(&current_time, NULL);
-	return ((current_time.tv_sec * 1000000) + current_time.tv_usec);
+	return ((current_time.tv_sec * 1000) + (current_time.tv_usec / 1000) );
 }

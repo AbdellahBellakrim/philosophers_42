@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 02:33:24 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/15 14:53:12 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/15 16:07:49 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ int main(int ac, char **av)
 	create_threads(&philo);
 	while (1)
 	{
-		sleep(1);
-		if(shared_data.satisfied == shared_data.number_philos)
+		if(shared_data.satisfied == shared_data.number_philos || shared_data.dead == 1)
 			break;
 	}
 	return(0);

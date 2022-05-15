@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 10:53:40 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/14 17:20:45 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/15 15:54:18 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_philo	*ft_lstnew(int id, t_args *shared_data)
 	element->id = id;
 	element->meals_eaten = 0;
 	element->shared_data = shared_data;
+	element->last_meal = 0;
 	element->next = NULL;
 	return (element);
 }
