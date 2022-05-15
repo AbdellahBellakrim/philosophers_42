@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 02:33:24 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/15 13:56:59 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/15 14:53:12 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int main(int ac, char **av)
 	{
 		sleep(1);
 		if(shared_data.satisfied == shared_data.number_philos)
-			return (0);
+			break;
 	}
 	return(0);
 }
@@ -63,10 +63,15 @@ int create_threads(t_philo **philo)
 	return(0);
 }
 
-// meals number for each ph
-// check if a ph is dead
 // time for each ph 
+// check if a ph is dead
 // errors of parse and malloc, all functions protection 
 // check leaks 
 // norme 
 // bonus
+
+
+
+// current_time  = ft_gettime(void);
+
+// print ((current_time - start_time) / 1000)

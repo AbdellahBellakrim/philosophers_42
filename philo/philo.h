@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 02:33:33 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/14 17:20:24 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/15 14:59:55 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 //----------------------------------------
 #include <libc.h>
 #include <pthread.h>
+#include <sys/time.h>
 // ------------------------
 typedef struct t_args 
 {
@@ -54,7 +55,8 @@ int create_list(t_philo **philo, t_args *shared_data);
 int create_threads(t_philo **philo);
 // ----------------------------------------- routine
 void routine(void *philo);
-int eating_function(t_philo *philo);
-int sleeping_function(t_philo *philo);
-int thinking_function(t_philo *philo);
+int eating_function(t_philo *philo, long start_time);
+int sleeping_function(t_philo *philo, long start_time);
+int thinking_function(t_philo *philo, long start_time);
+long	ft_gettime(void);
 #endif

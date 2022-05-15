@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:50:19 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/15 13:51:18 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/15 14:08:40 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,16 @@ int	parsing(int ac, char **av, t_args *shared_data)
 	shared_data->dead = 0;
 	shared_data->satisfied = 0;
 	if(ac == 6)
+	{
 		shared_data->meal_number = ft_atoi(av[5]);
+		 if (shared_data->meal_number < 1)
+		 	return(-1);
+	}
 	else if(ac == 5)
-		shared_data->meal_number = -2;
+		shared_data->meal_number = -1;
 	if(shared_data->number_philos == -1 || \
 	shared_data->die_time == -1 || shared_data->eat_time == -1 || \
-	shared_data->sleep_time == -1 || shared_data->meal_number == -1)
+	shared_data->sleep_time == -1)
 		return(-1);
 	return(0);
 }
