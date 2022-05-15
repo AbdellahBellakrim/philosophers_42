@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 02:33:33 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/13 19:10:24 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/14 17:20:24 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct t_args
 	int		sleep_time;
 	int		meal_number; 
 	int 	dead; // check if a philo is dead or not
+	int 	satisfied;
 	struct t_philo *head;
 }t_args;
 //-----------------------------------------

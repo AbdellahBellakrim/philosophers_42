@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 10:53:40 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/13 19:12:29 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/14 17:20:45 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_philo	*ft_lstnew(int id, t_args *shared_data)
 		return (0);
 	pthread_mutex_init(&(element->fork), NULL);
 	element->id = id;
-	element->meals_eatenk = 0;
+	element->meals_eaten = 0;
 	element->shared_data = shared_data;
 	element->next = NULL;
 	return (element);

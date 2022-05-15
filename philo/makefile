@@ -6,7 +6,7 @@
 #    By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/16 15:24:59 by abellakr          #+#    #+#              #
-#    Updated: 2022/05/13 19:14:39 by abellakr         ###   ########.fr        #
+#    Updated: 2022/05/14 17:13:44 by abellakr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ CC = cc
 CFlAGS = -Wall -Wextra -Werror
 TH = -g -pthread
 
-SRC = philo.c utils.c ft_atoi.c utils_2.c
+SRC = philo.c utils.c ft_atoi.c utils_2.c routine.c
 OBJ = $(SRC:.c=.o)
 define HEADER_Ph
 		-------------------------------------------------------------------------------------------
