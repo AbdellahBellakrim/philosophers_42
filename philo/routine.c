@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 17:13:11 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/16 18:11:55 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/16 20:32:41 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int eating_function(t_philo *philo)
 	time = (ft_gettime() - philo->start_time);
 	printf("%ld %d has taken a fork\n",time ,philo->id);
 	printf("%ld %d  is eating\n",time ,philo->id);
-	// sleep_function(ft_gettime(), philo->shared_data->eat_time); // function to sleep
-	usleep(philo->shared_data->eat_time * 1000);
+	sleep_function(ft_gettime(), philo->shared_data->eat_time); // function to sleep
+	// usleep(philo->shared_data->eat_time * 1000);
 	philo->last_meal = ft_gettime();
 	philo->meals_eaten++;
 	if(philo->meals_eaten == philo->shared_data->meal_number)
@@ -66,8 +66,8 @@ int sleeping_function(t_philo *philo)
 		philo->shared_data->dead_time = ft_gettime() - philo->start_time;
 	}
 	printf("%ld %d is sleeping\n",time ,philo->id);
-	usleep(philo->shared_data->sleep_time * 1000);
-	// sleep_function(ft_gettime(), philo->shared_data->sleep_time);  // functin to sleep 
+	// usleep(philo->shared_data->sleep_time * 1000);
+	sleep_function(ft_gettime(), philo->shared_data->sleep_time);  // functin to sleep 
 	return (0);
 }
 //--------------------------------------------- thinking_function
