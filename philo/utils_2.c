@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 10:53:40 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/15 15:54:18 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/16 16:45:30 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,12 @@ t_philo	*ft_lstlast(t_philo **lst)
 	while (backup->next != NULL)
 		backup = backup->next;
 	return (backup);
+}
+//------------------------------------------------ time function
+long	ft_gettime(void)
+{
+	struct timeval current_time;
+
+	gettimeofday(&current_time, NULL);
+	return ((current_time.tv_sec * 1000) + (current_time.tv_usec / 1000) );
 }

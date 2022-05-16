@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 17:13:11 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/15 16:25:15 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/16 18:11:55 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,22 @@
 void routine(void *philo)
 {
 	t_philo *backup;
-	long	start_time;
 
 	backup = (t_philo *)philo;
-	start_time = ft_gettime();
+	backup->start_time = ft_gettime();
 	if(backup->id % 2 == 0)
 		usleep(500);
 	while(backup->shared_data->dead == 0)
 	{
-		eating_function(backup, start_time);
-		sleeping_function(backup, start_time);
-		thinking_function(backup, start_time);
+		eating_function(backup);
+		sleeping_function(backup);
+		thinking_function(backup);
 	}
 }
 //-------------------------------------------- eating function
-int eating_function(t_philo *philo, long start_time)
+int eating_function(t_philo *philo)
 {
 	t_philo	*left_fork;
-	long	current_time;
 	long	time;
 
 	if(philo->next == NULL)
@@ -41,55 +39,52 @@ int eating_function(t_philo *philo, long start_time)
 	else
 		left_fork = philo->next;
 	pthread_mutex_lock (&(philo->fork));
-	current_time = ft_gettime();
-	time = (current_time - start_time);
-	printf("%ld %d has taken a fork\n",time ,philo->id);
 	pthread_mutex_lock (&(left_fork->fork));
+	time = (ft_gettime() - philo->start_time);
+	printf("%ld %d has taken a fork\n",time ,philo->id);
 	printf("%ld %d  is eating\n",time ,philo->id);
+	// sleep_function(ft_gettime(), philo->shared_data->eat_time); // function to sleep
+	usleep(philo->shared_data->eat_time * 1000);
+	philo->last_meal = ft_gettime();
 	philo->meals_eaten++;
 	if(philo->meals_eaten == philo->shared_data->meal_number)
 		philo->shared_data->satisfied++;
-	int a = philo->shared_data->eat_time * 1000;
-	current_time = ft_gettime();
-	philo->last_meal = ft_gettime();
-	while(ft_gettime() - current_time < a / 1000)
-	{
-		usleep(100);
-	}
 	pthread_mutex_unlock (&(philo->fork));
 	pthread_mutex_unlock (&(left_fork->fork));
 	return (0);
 }
 //------------------------------------------------ sleeping function
-int sleeping_function(t_philo *philo, long start_time)
+int sleeping_function(t_philo *philo)
 {
-	long	current_time;
 	long	time;
 
-	current_time = ft_gettime();
-	time = (current_time - start_time);
+	time = (ft_gettime() - philo->start_time);
+	if(ft_gettime() - philo->last_meal > philo->shared_data->die_time)
+	{
+		philo->shared_data->dead = 1;
+		philo->shared_data->dead_id = philo->id;
+		philo->shared_data->dead_time = ft_gettime() - philo->start_time;
+	}
 	printf("%ld %d is sleeping\n",time ,philo->id);
-	int a = philo->shared_data->sleep_time * 1000;
-	while(ft_gettime() - current_time < a / 1000)
-		usleep(100);
+	usleep(philo->shared_data->sleep_time * 1000);
+	// sleep_function(ft_gettime(), philo->shared_data->sleep_time);  // functin to sleep 
 	return (0);
 }
 //--------------------------------------------- thinking_function
-int thinking_function(t_philo *philo, long start_time)
+int thinking_function(t_philo *philo)
 {
-	long	current_time;
 	long	time;
 
-	current_time = ft_gettime();
-	time = (current_time - start_time);
+	time = (ft_gettime() - philo->start_time);
 	printf("%ld %d is thinking\n",time ,philo->id);
 	return (0);
 }
-//------------------------------------------------ time function
-long	ft_gettime(void)
+//------------------------------ sleep  function
+void	sleep_function(long current_time, int time)
 {
-	struct timeval current_time;
-
-	gettimeofday(&current_time, NULL);
-	return ((current_time.tv_sec * 1000) + (current_time.tv_usec / 1000) );
+	int a;
+	
+	a = time * 1000;
+	while(ft_gettime() - current_time < a / 1000)
+		usleep(100);
 }

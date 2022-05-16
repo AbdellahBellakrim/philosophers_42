@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 02:33:24 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/15 16:07:49 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/16 18:16:21 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int main(int ac, char **av)
 {
 	t_args shared_data;
 	t_philo *philo;
+	t_philo *tmp;
 
 	philo = NULL;
 	if(ac != 5 && ac != 6)
@@ -24,10 +25,23 @@ int main(int ac, char **av)
 		return(1);
 	create_list(&philo, &shared_data);
 	create_threads(&philo);
+	tmp = philo;
 	while (1)
 	{
-		if(shared_data.satisfied == shared_data.number_philos || shared_data.dead == 1)
+		if(shared_data.satisfied == shared_data.number_philos)
 			break;
+		if(ft_gettime() - tmp->last_meal > tmp->shared_data->die_time)
+		{
+			tmp->shared_data->dead = 1;
+			tmp->shared_data->dead_id = tmp->id;
+			tmp->shared_data->dead_time = ft_gettime() - tmp->start_time;
+			printf("%ld %d died\n",shared_data.dead_time ,shared_data.dead_id);
+			break ;
+		}
+		if(tmp->next == NULL)
+			tmp = tmp->shared_data->head;
+		else
+			tmp = tmp->next;
 	}
 	return(0);
 }
@@ -57,20 +71,19 @@ int create_threads(t_philo **philo)
 	while(backup)
 	{
 		pthread_create(&(backup->thread), NULL, (void *)routine, backup);
+		backup->last_meal = ft_gettime();
 		backup = backup->next;
 	}
 	return(0);
 }
 
-// time for each ph 
 // check if a ph is dead
 // errors of parse and malloc, all functions protection 
 // check leaks 
 // norme 
 // bonus
-
-
-
-// current_time  = ft_gettime(void);
-
-// print ((current_time - start_time) / 1000)
+// ---------------------
+// ./philo 5 800 200 200 no one should die
+// ./philo 5 800 200 200 7  no one should die and sim stop in 7 
+// ./philo 4 410 200 200 no one should die
+// ./philo 4 310 200 100  one should die
