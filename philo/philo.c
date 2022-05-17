@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 02:33:24 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/16 18:16:21 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/17 22:05:39 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int main(int ac, char **av)
 	tmp = philo;
 	while (1)
 	{
+		usleep(200);
 		if(shared_data.satisfied == shared_data.number_philos)
 			break;
 		if(ft_gettime() - tmp->last_meal > tmp->shared_data->die_time)
