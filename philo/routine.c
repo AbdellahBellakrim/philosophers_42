@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 17:13:11 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/17 22:04:05 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/18 14:19:28 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void routine(void *philo)
 	{
 		eating_function(backup);
 		sleeping_function(backup);
-		thinking_function(backup);
+		thinking_function(backup);	
 	}
 }
 //-------------------------------------------- eating function
@@ -43,8 +43,12 @@ int eating_function(t_philo *philo)
 		pthread_mutex_lock (&(philo->fork));
 		pthread_mutex_lock (&(left_fork->fork));
 		time = (ft_gettime() - philo->start_time);
+		pthread_mutex_lock(&(philo->shared_data->print));
 		printf("%ld %d has taken a fork\n",time ,philo->id);
+		pthread_mutex_unlock(&(philo->shared_data->print));
+		pthread_mutex_lock(&(philo->shared_data->print));
 		printf("%ld %d  is eating\n",time ,philo->id);
+		pthread_mutex_unlock(&(philo->shared_data->print));
 		sleep_function(ft_gettime(), philo->shared_data->eat_time); // function to sleep
 		philo->last_meal = ft_gettime();
 		philo->meals_eaten++;
@@ -63,7 +67,9 @@ int sleeping_function(t_philo *philo)
 	time = (ft_gettime() - philo->start_time);
 	if(philo->shared_data->dead == 0)
 	{
+		pthread_mutex_lock(&(philo->shared_data->print));
 		printf("%ld %d is sleeping\n",time ,philo->id);
+		pthread_mutex_unlock(&(philo->shared_data->print));
 		sleep_function(ft_gettime(), philo->shared_data->sleep_time);  // functin to sleep 		
 	}
 	return (0);
@@ -75,7 +81,11 @@ int thinking_function(t_philo *philo)
 
 	time = (ft_gettime() - philo->start_time);
 	if(philo->shared_data->dead == 0)
+	{
+		pthread_mutex_lock(&(philo->shared_data->print));
 		printf("%ld %d is thinking\n",time ,philo->id);	
+		pthread_mutex_unlock(&(philo->shared_data->print));
+	}
 	return (0);
 }
 //------------------------------ sleep  function

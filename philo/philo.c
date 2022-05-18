@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 02:33:24 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/17 22:05:39 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/18 12:42:13 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int main(int ac, char **av)
 	create_list(&philo, &shared_data);
 	create_threads(&philo);
 	tmp = philo;
+	pthread_mutex_init(&(shared_data.print), NULL);
 	while (1)
 	{
-		usleep(200);
 		if(shared_data.satisfied == shared_data.number_philos)
 			break;
 		if(ft_gettime() - tmp->last_meal > tmp->shared_data->die_time)
@@ -36,6 +36,7 @@ int main(int ac, char **av)
 			tmp->shared_data->dead = 1;
 			tmp->shared_data->dead_id = tmp->id;
 			tmp->shared_data->dead_time = ft_gettime() - tmp->start_time;
+			pthread_mutex_lock(&(shared_data.print));
 			printf("%ld %d died\n",shared_data.dead_time ,shared_data.dead_id);
 			break ;
 		}
@@ -43,7 +44,7 @@ int main(int ac, char **av)
 			tmp = tmp->shared_data->head;
 		else
 			tmp = tmp->next;
-	}
+	}	
 	return(0);
 }
 //--------------------------------- create lincked list 

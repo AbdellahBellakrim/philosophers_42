@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 02:33:33 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/16 18:06:33 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/18 12:21:34 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct t_args
 	int 	dead; // check if a philo is dead or not
 	int 	dead_id; // died philo id
 	long	dead_time;// died time of philo 
+	pthread_mutex_t	print;
 	struct t_philo *head;
 }t_args;
 //-----------------------------------------
