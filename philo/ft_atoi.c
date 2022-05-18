@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 16:25:27 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/12 08:54:39 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/18 17:04:29 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_max(long long number, int signe)
 	if (number > INT_MAX || number < INT_MIN)
 	{
 		write(2, "Error\n", 6);
-		return(-1);
+		return (-1);
 	}
 	return (number);
 }
@@ -73,7 +73,7 @@ int	ft_atoi(char *p)
 	if (ft_strlen(p) > 11)
 	{
 		write(2, "Error\n", 6);
-		return(-1);
+		return (-1);
 	}
 	free(p);
 	while (*p >= '0' && *p <= '9')

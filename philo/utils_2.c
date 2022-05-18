@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 10:53:40 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/16 16:45:30 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/18 18:41:32 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_philo	*ft_lstnew(int id, t_args *shared_data)
 	element->next = NULL;
 	return (element);
 }
+
 //------------------------------------ ft_add_back
 void	ft_lstadd_back(t_philo **lst, t_philo *new)
 {
@@ -35,7 +36,6 @@ void	ft_lstadd_back(t_philo **lst, t_philo *new)
 	if (*lst == NULL)
 	{
 		(*lst) = new;
-		
 		return ;
 	}
 	else if (*lst != NULL)
@@ -44,6 +44,7 @@ void	ft_lstadd_back(t_philo **lst, t_philo *new)
 		lastnode->next = new;
 	}
 }
+
 //---------------------------------------- find last node int list 
 t_philo	*ft_lstlast(t_philo **lst)
 {
@@ -56,11 +57,22 @@ t_philo	*ft_lstlast(t_philo **lst)
 		backup = backup->next;
 	return (backup);
 }
+
 //------------------------------------------------ time function
 long	ft_gettime(void)
 {
-	struct timeval current_time;
+	struct timeval	current_time;
 
 	gettimeofday(&current_time, NULL);
-	return ((current_time.tv_sec * 1000) + (current_time.tv_usec / 1000) );
+	return ((current_time.tv_sec * 1000) + (current_time.tv_usec / 1000));
+}
+
+//------------------------------ sleep  function
+void	sleep_function(long current_time, int time)
+{
+	int	a;
+
+	a = time * 1000;
+	while (ft_gettime() - current_time < a / 1000)
+		usleep(100);
 }

@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:50:19 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/15 14:08:40 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/18 16:58:14 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,10 @@
 //-------------------------------------------------
 int	parsing(int ac, char **av, t_args *shared_data)
 {
-	if(check_arguments(ac, av) == 0)
+	if (check_arguments(ac, av) == 0)
 	{
-		//free memory allocated
 		write(2, "invalid arguments\n", 18);
-		return(-1);
+		return (-1);
 	}
 	shared_data->number_philos = ft_atoi(av[1]);
 	shared_data->die_time = ft_atoi(av[2]);
@@ -27,20 +26,21 @@ int	parsing(int ac, char **av, t_args *shared_data)
 	shared_data->sleep_time = ft_atoi(av[4]);
 	shared_data->dead = 0;
 	shared_data->satisfied = 0;
-	if(ac == 6)
+	if (ac == 6)
 	{
 		shared_data->meal_number = ft_atoi(av[5]);
-		 if (shared_data->meal_number < 1)
-		 	return(-1);
+		if (shared_data->meal_number < 1)
+			return (-1);
 	}
-	else if(ac == 5)
+	else if (ac == 5)
 		shared_data->meal_number = -1;
-	if(shared_data->number_philos == -1 || \
+	if (shared_data->number_philos == -1 || \
 	shared_data->die_time == -1 || shared_data->eat_time == -1 || \
 	shared_data->sleep_time == -1)
-		return(-1);
-	return(0);
+		return (-1);
+	return (0);
 }
+
 //-------------------------------------------------
 int	ft_isdigit(int str)
 {
@@ -49,26 +49,28 @@ int	ft_isdigit(int str)
 	else
 		return (0);
 }
+
 //-------------------------------------------------
 int	check_arguments(int ac, char **av)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 1;
-	while(i < ac)
+	while (i < ac)
 	{
 		j = 0;
-		while(av[i][j])
+		while (av[i][j])
 		{
-			if(ft_isdigit(av[i][j]) == 0)
+			if (ft_isdigit(av[i][j]) == 0)
 				return (0);
-			j++;	
+			j++;
 		}
 		i++;
 	}
 	return (1);
 }
+
 //---------------------------------------------------
 size_t	ft_strlen(const char *str)
 {
