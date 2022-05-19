@@ -68,6 +68,7 @@ int	thinking_function(t_philo *philo)
 	if (philo->shared_data->dead == 0)
 	{
 		pthread_mutex_lock(&(philo->shared_data->print));
+		printf("%ld %d is thinking\n", time, philo->id);
 		pthread_mutex_unlock(&(philo->shared_data->print));
 	}
 	return (0);
