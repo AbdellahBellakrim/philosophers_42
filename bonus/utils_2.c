@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 //----------------------------------  ft_lstnew
 t_philo	*ft_lstnew(int id, t_args *shared_data)
 {

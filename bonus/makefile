@@ -32,12 +32,12 @@ BPurple='\033[1;35m'      # Purple
 BCyan='\033[1;36m'        # Cyan
 BWhite='\033[1;37m'       # White
 
-NAME = philo
+NAME = philo_bonus
 CC = cc
 CFlAGS = -Wall -Wextra -Werror
 TH = -g -pthread
 
-SRC = philo.c utils.c ft_atoi.c utils_2.c
+SRC = philo.c utils.c ft_atoi.c utils_2.c 
 OBJ = $(SRC:.c=.o)
 define HEADER_Ph
 		-------------------------------------------------------------------------------------------
