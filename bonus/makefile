@@ -37,7 +37,7 @@ CC = cc
 CFlAGS = -Wall -Wextra -Werror
 TH = -g -pthread
 
-SRC = philo.c utils.c ft_atoi.c utils_2.c routine.c
+SRC = philo.c utils.c ft_atoi.c utils_2.c
 OBJ = $(SRC:.c=.o)
 define HEADER_Ph
 		-------------------------------------------------------------------------------------------

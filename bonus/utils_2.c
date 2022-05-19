@@ -58,21 +58,3 @@ t_philo	*ft_lstlast(t_philo **lst)
 	return (backup);
 }
 
-//------------------------------------------------ time function
-long	ft_gettime(void)
-{
-	struct timeval	current_time;
-
-	gettimeofday(&current_time, NULL);
-	return ((current_time.tv_sec * 1000) + (current_time.tv_usec / 1000));
-}
-
-//------------------------------ sleep  function
-void	sleep_function(long current_time, int time)
-{
-	int	a;
-
-	a = time * 1000;
-	while (ft_gettime() - current_time < a / 1000)
-		usleep(100);
-}
