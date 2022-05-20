@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 02:33:24 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/20 20:16:20 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/20 22:36:34 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	create_process(t_args *shared_data)
 
 	i = 1;
 	shared_data->pid_table = (int *)malloc(sizeof(int) * shared_data->number_philos);
+	shared_data->start_time = ft_gettime();
 	while(i <= shared_data->number_philos)
 	{
 		shared_data->pid_table[i - 1] = fork();
@@ -49,6 +50,9 @@ void	create_process(t_args *shared_data)
 		i++;
 	}
 	waitpid(0, NULL, 0);
+	i = -1;
+	while(++i < shared_data->number_philos)
+		kill(shared_data->pid_table[i], SIGINT);
 	
 }
 // time probelm 

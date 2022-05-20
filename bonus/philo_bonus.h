@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 21:04:10 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/20 21:04:11 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/20 22:36:41 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ typedef struct t_args
 	int				meal_number;
 	int 			philo_id;
 	sem_t 			*forks;
-	//-----------------------------------------
 	int 			*pid_table;
+	long	start_time;
+	//-----------------------------------------
 	pthread_t		check_dead;
 	int				dead;
 	//------------------------------------------
-	long	start_time;
 }t_args;
 //------------------------------------------- parsing
 int		check_arguments(int ac, char **av);
