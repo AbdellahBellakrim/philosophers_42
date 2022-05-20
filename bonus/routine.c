@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:55:30 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/20 22:44:51 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/20 23:29:00 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	handle_cases(t_args *shared_data)
 void	routine(t_args *shared_data)
 {
 	if (shared_data->philo_id % 2 == 0)
-		usleep(50);
+		usleep(500);
 	eating_function(shared_data);
 	sleeping_function(shared_data);
 	thinking_function(shared_data);
@@ -59,8 +59,8 @@ void sleeping_function(t_args *shared_data)
 	long 	time;
 
 	time = ft_gettime() - shared_data->start_time;
-	printf("%ld %d is sleeping\n",time ,shared_data->philo_id);
 	sleep_function(ft_gettime(), shared_data->sleep_time);
+	printf("%ld %d is sleeping\n",time ,shared_data->philo_id);
 }
 //--------------------------------------------------------
 void	thinking_function(t_args *shared_data)
