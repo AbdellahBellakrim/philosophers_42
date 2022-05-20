@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 02:33:24 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/20 19:00:38 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/20 20:16:20 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,8 @@ void	create_process(t_args *shared_data)
 		}
 		i++;
 	}
-	wait(NULL);
+	waitpid(0, NULL, 0);
+	
 }
-// handle last parameter
 // time probelm 
 // handle dead case
-//----------------------------------------------------
-// void	wait_function(t_args *shared_data)
-// {
-	
-// }
