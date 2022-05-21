@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 02:33:24 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/20 22:36:34 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/21 03:13:42 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	init_data(t_args *shared_data)
 void	create_process(t_args *shared_data)
 {
 	int i;
+	int tmp;
 
 	i = 1;
 	shared_data->pid_table = (int *)malloc(sizeof(int) * shared_data->number_philos);
@@ -44,16 +45,38 @@ void	create_process(t_args *shared_data)
 		if(shared_data->pid_table[i - 1] == 0)
 		{
 			shared_data->philo_id = i;
-			// pthread_create(&(shared_data->check_dead), NULL, (void *)dead, shared_data);
+			pthread_create(&(shared_data->check_dead), NULL, (void *)dead, shared_data);
 			handle_cases(shared_data);
 		}
 		i++;
 	}
-	waitpid(0, NULL, 0);
-	i = -1;
-	while(++i < shared_data->number_philos)
-		kill(shared_data->pid_table[i], SIGINT);
+	if(waitpid(0, &tmp, 0) > 0)
+	{
+		if(tmp != 0)
+		{
+			i = -1;
+			while(++i < shared_data->number_philos)
+				kill(shared_data->pid_table[i], SIGINT);			
+		}
+	}
 	
 }
-// time probelm 
-// handle dead case
+//-----------------------------------------------------------------------
+void	dead(void *shared_data)
+{
+	t_args *tmp;
+
+	tmp = (t_args *)shared_data;
+	while(1)
+	{
+		if(tmp->check_dead_var == 1)
+		{
+			if (ft_gettime() - tmp->last_meal > tmp->die_time)
+			{	
+				printf("%ld %d died\n", ft_gettime() - tmp->start_time, \
+				tmp->philo_id);
+				exit(1);
+			}		
+		}
+	}
+}

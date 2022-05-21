@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:55:30 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/20 23:29:00 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/21 03:07:56 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,17 @@ void	eating_function(t_args *shared_data)
 {
 	long	time;
 
+	sem_wait(shared_data->forks);
+	sem_wait(shared_data->forks);
 	time = ft_gettime() - shared_data->start_time;
-	sem_wait(shared_data->forks);
-	sem_wait(shared_data->forks);
 	printf("%ld %d has taken a fork\n",time ,shared_data->philo_id);
+	shared_data->check_dead_var = 0;
 	printf("%ld %d is eating\n",time ,shared_data->philo_id);
+	shared_data->last_meal = ft_gettime();
 	sleep_function(ft_gettime(), shared_data->eat_time);
+	shared_data->check_dead_var = 1;
 	sem_post(shared_data->forks);
-	sem_post(shared_data->forks);
+	sem_post(shared_data->forks);	
 }
 //-------------------------------------------------
 void sleeping_function(t_args *shared_data)
@@ -59,8 +62,8 @@ void sleeping_function(t_args *shared_data)
 	long 	time;
 
 	time = ft_gettime() - shared_data->start_time;
-	sleep_function(ft_gettime(), shared_data->sleep_time);
 	printf("%ld %d is sleeping\n",time ,shared_data->philo_id);
+	sleep_function(ft_gettime(), shared_data->sleep_time);
 }
 //--------------------------------------------------------
 void	thinking_function(t_args *shared_data)
