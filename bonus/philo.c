@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 02:33:24 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/21 03:13:42 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/22 13:53:53 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ void	init_data(t_args *shared_data)
 void	create_process(t_args *shared_data)
 {
 	int i;
+	int	j;
 	int tmp;
 
 	i = 1;
+	j = 0;
 	shared_data->pid_table = (int *)malloc(sizeof(int) * shared_data->number_philos);
 	shared_data->start_time = ft_gettime();
 	while(i <= shared_data->number_philos)
@@ -50,14 +52,18 @@ void	create_process(t_args *shared_data)
 		}
 		i++;
 	}
-	if(waitpid(0, &tmp, 0) > 0)
+	while (j < shared_data->number_philos)
 	{
-		if(tmp != 0)
+		if(waitpid(0, &tmp, 0) > 0)
 		{
-			i = -1;
-			while(++i < shared_data->number_philos)
-				kill(shared_data->pid_table[i], SIGINT);			
+			if(tmp != 0)
+			{
+				i = -1;
+				while(++i < shared_data->number_philos)
+					kill(shared_data->pid_table[i], SIGINT);			
+			}
 		}
+		j++;
 	}
 	
 }
