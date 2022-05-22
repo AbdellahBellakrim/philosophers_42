@@ -6,7 +6,7 @@
 #    By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/16 15:24:59 by abellakr          #+#    #+#              #
-#    Updated: 2022/05/20 16:59:23 by abellakr         ###   ########.fr        #
+#    Updated: 2022/05/22 15:47:28 by abellakr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,12 +32,12 @@ BPurple='\033[1;35m'      # Purple
 BCyan='\033[1;36m'        # Cyan
 BWhite='\033[1;37m'       # White
 
-NAME = philo
+NAME = philo_bonus
 CC = cc
 CFlAGS = -Wall -Wextra -Werror
 TH = -g -pthread
 
-SRC = philo.c utils.c ft_atoi.c utils_2.c  routine.c
+SRC = philo.c utils.c ft_atoi.c utils_2.c  routine.c dead.c
 OBJ = $(SRC:.c=.o)
 define HEADER_Ph
 		-------------------------------------------------------------------------------------------

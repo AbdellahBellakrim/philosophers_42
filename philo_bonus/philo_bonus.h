@@ -6,11 +6,9 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 21:04:10 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/21 03:08:15 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/22 15:45:55 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #ifndef PHILO_BONUS_H
 # define PHILO_BONUS_H
@@ -27,11 +25,12 @@ typedef struct t_args
 	int				eat_time;
 	int				sleep_time;
 	int				meal_number;
-	int 			philo_id;
-	sem_t 			*forks;
-	int 			*pid_table;
+	int				philo_id;
+	sem_t			*forks;
+	sem_t			*print;
+	int				*pid_table;
 	long			start_time;
-	long 			last_meal;
+	long			last_meal;
 	pthread_t		check_dead;
 	int				check_dead_var;
 }t_args;
@@ -55,4 +54,5 @@ void	dead(void *shared_data);
 //------------------------------------------------
 long	ft_gettime(void);
 void	sleep_function(long current_time, int time);
+void	wait_function(t_args *shared_data);
 #endif
