@@ -6,7 +6,7 @@
 /*   By: abellakr <abellakr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:55:30 by abellakr          #+#    #+#             */
-/*   Updated: 2022/05/22 15:42:24 by abellakr         ###   ########.fr       */
+/*   Updated: 2022/05/22 16:33:48 by abellakr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	eating_function(t_args *shared_data)
 	long	time;
 
 	sem_wait(shared_data->forks);
+	if (shared_data->number_philos == 1)
+		shared_data->check_dead_var = 1;
 	sem_wait(shared_data->forks);
 	time = ft_gettime() - shared_data->start_time;
 	sem_wait(shared_data->print);
